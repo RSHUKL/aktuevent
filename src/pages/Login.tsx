@@ -43,77 +43,85 @@ const Login: React.FC = () => {
   };
   
   return (
-    <div className="container mx-auto px-4 py-16">
-      <div className="max-w-md mx-auto">
-        <div className="card">
-          <div className="text-center mb-6">
-            <h1 className="text-2xl font-bold text-neutral-900">Welcome Back</h1>
-            <p className="text-neutral-600 mt-1">Sign in to access your account</p>
+    <div
+      className="min-h-screen bg-cover bg-center bg-no-repeat relative"
+      style={{ backgroundImage: `url('/i.jpg')` }}
+    >
+      {/* Add a dark overlay for readability */}
+      <div className="absolute inset-0 bg-neutral-900 opacity-60"></div>
+      
+      <div className="container mx-auto px-4 py-16 relative z-10">
+        <div className="max-w-md mx-auto">
+          <div className="card bg-white/80 backdrop-blur-sm">
+            <div className="text-center mb-6">
+              <h1 className="text-2xl font-bold text-neutral-900">Welcome Back</h1>
+              <p className="text-neutral-600 mt-1">Sign in to access your account</p>
+            </div>
+            
+            {error && (
+              <div className="bg-error-50 border-l-4 border-error-500 p-4 mb-6 flex items-start">
+                <AlertCircle className="h-5 w-5 text-error-500 mr-3 flex-shrink-0 mt-0.5" />
+                <p className="text-error-700">{error}</p>
+              </div>
+            )}
+            
+            <form onSubmit={handleSubmit}>
+              <div className="mb-4">
+                <label htmlFor="email" className="label">Email Address</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Mail className="h-5 w-5 text-neutral-400" />
+                  </div>
+                  <input
+                    id="email"
+                    type="email"
+                    className="input pl-10"
+                    placeholder="you@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </div>
+                <p className="mt-1 text-xs text-neutral-500">
+                  Demo: <code>admin@university.edu</code> or <code>student@university.edu</code>
+                </p>
+              </div>
+              
+              <div className="mb-6">
+                <label htmlFor="password" className="label">Password</label>
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Lock className="h-5 w-5 text-neutral-400" />
+                  </div>
+                  <input
+                    id="password"
+                    type="password"
+                    className="input pl-10"
+                    placeholder="••••••••"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </div>
+                <p className="mt-1 text-xs text-neutral-500">
+                  Demo: <code>admin123</code> or <code>student123</code>
+                </p>
+              </div>
+              
+              <button
+                type="submit"
+                className="btn btn-primary w-full"
+                disabled={isLoading}
+              >
+                {isLoading ? (
+                  <span className="flex items-center justify-center">
+                    <Loader className="h-4 w-4 animate-spin mr-2" />
+                    Signing in...
+                  </span>
+                ) : (
+                  'Sign In'
+                )}
+              </button>
+            </form>
           </div>
-          
-          {error && (
-            <div className="bg-error-50 border-l-4 border-error-500 p-4 mb-6 flex items-start">
-              <AlertCircle className="h-5 w-5 text-error-500 mr-3 flex-shrink-0 mt-0.5" />
-              <p className="text-error-700">{error}</p>
-            </div>
-          )}
-          
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <label htmlFor="email" className="label">Email Address</label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Mail className="h-5 w-5 text-neutral-400" />
-                </div>
-                <input
-                  id="email"
-                  type="email"
-                  className="input pl-10"
-                  placeholder="you@example.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <p className="mt-1 text-xs text-neutral-500">
-                Demo: <code>admin@university.edu</code> or <code>student@university.edu</code>
-              </p>
-            </div>
-            
-            <div className="mb-6">
-              <label htmlFor="password" className="label">Password</label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <Lock className="h-5 w-5 text-neutral-400" />
-                </div>
-                <input
-                  id="password"
-                  type="password"
-                  className="input pl-10"
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              <p className="mt-1 text-xs text-neutral-500">
-                Demo: <code>admin123</code> or <code>student123</code>
-              </p>
-            </div>
-            
-            <button
-              type="submit"
-              className="btn btn-primary w-full"
-              disabled={isLoading}
-            >
-              {isLoading ? (
-                <span className="flex items-center justify-center">
-                  <Loader className="h-4 w-4 animate-spin mr-2" />
-                  Signing in...
-                </span>
-              ) : (
-                'Sign In'
-              )}
-            </button>
-          </form>
         </div>
       </div>
     </div>
